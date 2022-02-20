@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/activity_create.xml" value="0.2375" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/activity_main.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/activity_create_pet.xml" value="0.234375" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/fragment_create_pet.xml" value="0.234375" />
       </map>
     </option>
   </component>

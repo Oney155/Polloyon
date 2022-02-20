@@ -6,21 +6,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-   Button btn_open;
+   Button btn_add, btn_add_fragment;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      btn_open = findViewById(R.id.btn_ingresar);
-      btn_open.setOnClickListener(new View.OnClickListener() {
+      btn_add = findViewById(R.id.btn_add);
+      btn_add_fragment = findViewById(R.id.btn_add_fragment);
+
+      btn_add.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, CreateActivity.class));
+            startActivity(new Intent(MainActivity.this, CreatePetActivity.class));
+         }
+      });
+
+      btn_add_fragment.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            CreatePetFragment fm = new CreatePetFragment();
+            fm.show(getSupportFragmentManager(), "Navegar a fragment");
          }
       });
    }

@@ -10,7 +10,7 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.Test">
       <activity
-         android:name=".CreateActivity"
+         android:name=".CreatePetActivity"
          android:exported="true" />
       <activity
          android:name=".MainActivity"

@@ -17,56 +17,58 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateActivity extends AppCompatActivity {
+public class CreatePetActivity extends AppCompatActivity {
 
-   Button btn_agg;
+   Button btn_add;
    EditText name, age, color;
-   private FirebaseFirestore mFirestore;
+   private FirebaseFirestore mfirestore;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_create);
+      setContentView(R.layout.activity_create_pet);
+
       this.setTitle("Crear mascota");
       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      mFirestore = FirebaseFirestore.getInstance();
+      mfirestore = FirebaseFirestore.getInstance();
 
       name = findViewById(R.id.nombre);
       age = findViewById(R.id.edad);
       color = findViewById(R.id.color);
-      btn_agg = findViewById(R.id.btn_agregar);
+      btn_add = findViewById(R.id.btn_add);
 
-      btn_agg.setOnClickListener(new View.OnClickListener() {
+      btn_add.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-            String nombreMascota = name.getText().toString().trim();
-            String edadMascota = age.getText().toString().trim();
-            String colorMascota = color.getText().toString().trim();
+            String namepet = name.getText().toString().trim();
+            String agepet = age.getText().toString().trim();
+            String colorpet = color.getText().toString().trim();
 
-            if (nombreMascota.isEmpty() && edadMascota.isEmpty() && colorMascota.isEmpty()){
-               Toast.makeText(getApplicationContext(), "Ingresar datos", Toast.LENGTH_SHORT).show();
+            if(namepet.isEmpty() && agepet.isEmpty() && colorpet.isEmpty()){
+               Toast.makeText(getApplicationContext(), "Ingresar los datos", Toast.LENGTH_SHORT).show();
             }else{
-               postmascota(nombreMascota, edadMascota, colorMascota);
+               postPet(namepet, agepet, colorpet);
             }
          }
       });
    }
 
-   private void postmascota(String nombreMascota, String edadMascota, String colorMascota) {
+   private void postPet(String namepet, String agepet, String colorpet) {
       Map<String, Object> map = new HashMap<>();
-      map.put("name", nombreMascota);
-      map.put("age", edadMascota);
-      map.put("color", colorMascota);
-      mFirestore.collection("mascota").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+      map.put("name", namepet);
+      map.put("age", agepet);
+      map.put("color", colorpet);
+
+      mfirestore.collection("pet").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
          @Override
          public void onSuccess(DocumentReference documentReference) {
-            Toast.makeText(getApplicationContext(), "Mascota ingresada correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Creado exitosamente", Toast.LENGTH_SHORT).show();
             finish();
          }
       }).addOnFailureListener(new OnFailureListener() {
          @Override
          public void onFailure(@NonNull Exception e) {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error al ingresar", Toast.LENGTH_SHORT).show();
          }
       });
    }
