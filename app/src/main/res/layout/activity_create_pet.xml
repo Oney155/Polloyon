@@ -24,7 +24,9 @@
          android:id="@+id/textView"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="Nombre" />
+         android:text="Nombre"
+         android:textSize="16sp"
+         android:textStyle="bold" />
 
       <EditText
          android:id="@+id/nombre"
@@ -33,20 +35,32 @@
          android:ems="10"
          android:inputType="textPersonName" />
 
+      <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Edad"
+         android:textSize="16sp"
+         android:textStyle="bold" />
+
       <EditText
          android:id="@+id/edad"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:ems="10"
-         android:hint="Edad"
          android:inputType="textPersonName" />
+
+      <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Color"
+         android:textSize="16sp"
+         android:textStyle="bold" />
 
       <EditText
          android:id="@+id/color"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:ems="10"
-         android:hint="Color"
          android:inputType="textPersonName" />
 
       <Space
