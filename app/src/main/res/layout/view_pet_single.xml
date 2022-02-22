@@ -4,8 +4,9 @@
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
    android:layout_marginBottom="10dp"
-   android:backgroundTint="#EAEAEA"
-   app:cardCornerRadius="20dp">
+   android:backgroundTint="#F5F5F5"
+   app:cardCornerRadius="20dp"
+   app:cardElevation="0dp">
 
    <LinearLayout
       android:layout_width="match_parent"
@@ -53,10 +54,22 @@
       </LinearLayout>
 
       <ImageView
+         android:id="@+id/btn_editar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:background="#3F6BF1"
+         android:padding="5dp"
+         app:srcCompat="@drawable/ic_edit" />
+
+      <Space
+         android:layout_width="10dp"
+         android:layout_height="wrap_content" />
+
+      <ImageView
          android:id="@+id/btn_eliminar"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:background="#FF0000"
+         android:background="#EF1212"
          android:padding="5dp"
          app:srcCompat="@drawable/ic_delete" />
 

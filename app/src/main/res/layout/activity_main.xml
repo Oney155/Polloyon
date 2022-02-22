@@ -24,13 +24,19 @@
          android:id="@+id/btn_add"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="agregar mascota" />
+         android:text="agregar mascota"
+         app:cornerRadius="10dp" />
 
       <Button
          android:id="@+id/btn_add_fragment"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="agregar con fragment" />
+         android:text="agregar con fragment"
+         app:cornerRadius="10dp" />
+
+      <Space
+         android:layout_width="match_parent"
+         android:layout_height="10dp" />
 
       <androidx.recyclerview.widget.RecyclerView
          android:id="@+id/recyclerViewSingle"

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
       FirestoreRecyclerOptions<Pet> firestoreRecyclerOptions =
               new FirestoreRecyclerOptions.Builder<Pet>().setQuery(query, Pet.class).build();
 
-      mAdapter = new PetAdapter(firestoreRecyclerOptions, this);
+      mAdapter = new PetAdapter(firestoreRecyclerOptions, this, getSupportFragmentManager());
       mAdapter.notifyDataSetChanged();
       mRecycler.setAdapter(mAdapter);
 

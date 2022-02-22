@@ -1,6 +1,8 @@
 package com.pluartz.test.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -18,6 +21,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.pluartz.test.CreatePetActivity;
+import com.pluartz.test.CreatePetFragment;
 import com.pluartz.test.R;
 import com.pluartz.test.model.Pet;
 
@@ -25,15 +30,17 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
    
    private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
    Activity activity;
+   FragmentManager fm;
    /**
     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
     * FirestoreRecyclerOptions} for configuration options.
     *
     * @param options
     */
-   public PetAdapter(@NonNull FirestoreRecyclerOptions<Pet> options, Activity activity) {
+   public PetAdapter(@NonNull FirestoreRecyclerOptions<Pet> options, Activity activity, FragmentManager fm) {
       super(options);
       this.activity = activity;
+      this.fm = fm;
    }
 
    @Override
@@ -44,6 +51,23 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
       viewHolder.name.setText(Pet.getName());
       viewHolder.age.setText(Pet.getAge());
       viewHolder.color.setText(Pet.getColor());
+
+      viewHolder.btn_edit.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+//          SEND DATA ACTIVITY
+//            Intent i = new Intent(activity, CreatePetActivity.class);
+//            i.putExtra("id_pet", id);
+//            activity.startActivity(i);
+
+//          SEND DATA FRAGMENT
+            CreatePetFragment createPetFragment = new CreatePetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("id_pet", id);
+            createPetFragment.setArguments(bundle);
+            createPetFragment.show(fm, "open fragment");
+         }
+      });
 
       viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
          @Override
@@ -76,7 +100,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
 
    public class ViewHolder extends RecyclerView.ViewHolder {
       TextView name, age, color;
-      ImageView btn_delete;
+      ImageView btn_delete, btn_edit;
 
       public ViewHolder(@NonNull View itemView) {
          super(itemView);
@@ -85,6 +109,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
          age = itemView.findViewById(R.id.edad);
          color = itemView.findViewById(R.id.color);
          btn_delete = itemView.findViewById(R.id.btn_eliminar);
+         btn_edit = itemView.findViewById(R.id.btn_editar);
       }
    }
 }
