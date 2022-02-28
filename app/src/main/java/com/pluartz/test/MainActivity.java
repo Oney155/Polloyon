@@ -1,5 +1,6 @@
 package com.pluartz.test;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.pluartz.test.adapter.PetAdapter;
@@ -17,17 +19,21 @@ import com.pluartz.test.model.Pet;
 
 public class MainActivity extends AppCompatActivity {
 
-   Button btn_add, btn_add_fragment;
+   Button btn_add, btn_add_fragment, btn_exit;
    RecyclerView mRecycler;
    PetAdapter mAdapter;
    FirebaseFirestore mFirestore;
+   FirebaseAuth mAuth;
 
+   @SuppressLint("NotifyDataSetChanged")
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
       mFirestore = FirebaseFirestore.getInstance();
+      mAuth = FirebaseAuth.getInstance();
+
       mRecycler = findViewById(R.id.recyclerViewSingle);
       mRecycler.setLayoutManager(new LinearLayoutManager(this));
       Query query = mFirestore.collection("pet");
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
       btn_add = findViewById(R.id.btn_add);
       btn_add_fragment = findViewById(R.id.btn_add_fragment);
+      btn_exit = findViewById(R.id.btn_close);
+
       btn_add.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -52,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
          public void onClick(View v) {
             CreatePetFragment fm = new CreatePetFragment();
             fm.show(getSupportFragmentManager(), "Navegar a fragment");
+         }
+      });
+
+      btn_exit.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            mAuth.signOut();
+            finish();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
          }
       });
    }
