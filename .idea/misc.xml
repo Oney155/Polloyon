@@ -10,6 +10,10 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/view_item_pet.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/view_pet_single.xml" value="0.4" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/test/app/src/main/res/layout/view_single_pet.xml" value="0.2375" />
+        <entry key="..\:/Users/Pluartz/AndroidStudioProjects/test/app/src/main/res/layout/activity_login.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Pluartz/AndroidStudioProjects/test/app/src/main/res/layout/activity_main.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Pluartz/AndroidStudioProjects/test/app/src/main/res/layout/activity_register.xml" value="0.2484375" />
+        <entry key="..\:/Users/Pluartz/AndroidStudioProjects/test/app/src/main/res/layout/fragment_create_pet.xml" value="0.2484375" />
       </map>
     </option>
   </component>
