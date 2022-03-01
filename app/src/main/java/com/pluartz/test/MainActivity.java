@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
       mRecycler = findViewById(R.id.recyclerViewSingle);
       mRecycler.setLayoutManager(new LinearLayoutManager(this));
-      Query query = mFirestore.collection("pet");
+      Query query = mFirestore.collection("pet").whereEqualTo("id_user", mAuth.getCurrentUser().getUid());
 
       FirestoreRecyclerOptions<Pet> firestoreRecyclerOptions =
               new FirestoreRecyclerOptions.Builder<Pet>().setQuery(query, Pet.class).build();

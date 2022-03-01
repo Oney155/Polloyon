@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +30,7 @@ public class CreatePetFragment extends DialogFragment {
    Button btn_add;
    EditText name, age, color;
    private FirebaseFirestore mfirestore;
+   private FirebaseAuth mAuth;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class CreatePetFragment extends DialogFragment {
                             Bundle savedInstanceState) {
       View v = inflater.inflate(R.layout.fragment_create_pet, container, false);
       mfirestore = FirebaseFirestore.getInstance();
+      mAuth = FirebaseAuth.getInstance();
 
       name = v.findViewById(R.id.nombre);
       age = v.findViewById(R.id.edad);
@@ -82,8 +86,6 @@ public class CreatePetFragment extends DialogFragment {
          });
       }
 
-
-
       return v;
    }
 
@@ -108,14 +110,19 @@ public class CreatePetFragment extends DialogFragment {
    }
 
    private void postPet(String namepet, String agepet, String colorpet) {
+      String idUser = mAuth.getCurrentUser().getUid();
+      DocumentReference id = mfirestore.collection("pet").document();
+
       Map<String, Object> map = new HashMap<>();
+      map.put("id_user", idUser);
+      map.put("id", id.getId());
       map.put("name", namepet);
       map.put("age", agepet);
       map.put("color", colorpet);
 
-      mfirestore.collection("pet").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+      mfirestore.collection("pet").document(id.getId()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
          @Override
-         public void onSuccess(DocumentReference documentReference) {
+         public void onSuccess(Void unused) {
             Toast.makeText(getContext(), "Creado exitosamente", Toast.LENGTH_SHORT).show();
             getDialog().dismiss();
          }
