@@ -24,6 +24,18 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INICIAR SESIÓN"
+                android:textAlignment="center"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
             <EditText
                 android:id="@+id/correo"
                 android:layout_width="match_parent"
@@ -44,7 +56,8 @@
                 android:id="@+id/btn_ingresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingresar" />
+                android:text="Ingresar"
+                app:cornerRadius="50dp" />
 
             <Button
                 android:id="@+id/btn_register"
@@ -52,7 +65,17 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#203B8B"
                 android:text="registrarme"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:cornerRadius="50dp" />
+
+            <Button
+                android:id="@+id/btn_anonymous"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#008989"
+                android:text="Visitante"
+                android:textSize="12sp"
+                app:cornerRadius="50dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

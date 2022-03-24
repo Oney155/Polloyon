@@ -24,21 +24,23 @@
           android:id="@+id/btn_close"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="cerrar sesión" />
+          android:backgroundTint="#FF401F"
+          android:text="cerrar sesión"
+          app:cornerRadius="50dp" />
 
       <Button
-         android:id="@+id/btn_add"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:text="agregar mascota"
-         app:cornerRadius="10dp" />
+          android:id="@+id/btn_add"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="agregar mascota"
+          app:cornerRadius="50dp" />
 
       <Button
-         android:id="@+id/btn_add_fragment"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:text="agregar con fragment"
-         app:cornerRadius="10dp" />
+          android:id="@+id/btn_add_fragment"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="agregar con fragment"
+          app:cornerRadius="50dp" />
 
       <Space
          android:layout_width="match_parent"
