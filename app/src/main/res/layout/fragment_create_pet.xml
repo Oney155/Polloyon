@@ -47,6 +47,14 @@
          android:hint="Color"
          android:inputType="textPersonName" />
 
+      <EditText
+          android:id="@+id/precio_vacuna"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ems="10"
+          android:hint="Precio de vacuna"
+          android:inputType="numberDecimal" />
+
       <Space
          android:layout_width="match_parent"
          android:layout_height="15dp" />

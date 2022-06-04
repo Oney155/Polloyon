@@ -2,12 +2,14 @@ package com.pluartz.test.model;
 
 public class Pet {
    String name, age, color;
+   Double vaccine_price;
    public Pet(){}
 
-   public Pet(String name, String age, String color) {
+   public Pet(String name, String age, String color, Double vaccine_price) {
       this.name = name;
       this.age = age;
       this.color = color;
+      this.vaccine_price = vaccine_price;
    }
 
    public String getName() {
@@ -32,5 +34,13 @@ public class Pet {
 
    public void setColor(String color) {
       this.color = color;
+   }
+
+   public Double getVaccine_price() {
+      return vaccine_price;
+   }
+
+   public void setVaccine_price(Double vaccine_price) {
+      this.vaccine_price = vaccine_price;
    }
 }

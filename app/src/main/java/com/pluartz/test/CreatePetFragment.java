@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class CreatePetFragment extends DialogFragment {
 
    String id_pet;
    Button btn_add;
-   EditText name, age, color;
+   EditText name, age, color, precio_vacuna;
    private FirebaseFirestore mfirestore;
    private FirebaseAuth mAuth;
 
@@ -50,6 +52,7 @@ public class CreatePetFragment extends DialogFragment {
       name = v.findViewById(R.id.nombre);
       age = v.findViewById(R.id.edad);
       color = v.findViewById(R.id.color);
+      precio_vacuna = v.findViewById(R.id.precio_vacuna);
       btn_add = v.findViewById(R.id.btn_add);
 
       if (id_pet==null || id_pet==""){
@@ -59,11 +62,12 @@ public class CreatePetFragment extends DialogFragment {
                String namepet = name.getText().toString().trim();
                String agepet = age.getText().toString().trim();
                String colorpet = color.getText().toString().trim();
+               Double precio_vacunapet = Double.parseDouble(precio_vacuna.getText().toString().trim());
 
                if(namepet.isEmpty() && agepet.isEmpty() && colorpet.isEmpty()){
                   Toast.makeText(getContext(), "Ingresar los datos", Toast.LENGTH_SHORT).show();
                }else{
-                  postPet(namepet, agepet, colorpet);
+                  postPet(namepet, agepet, colorpet, precio_vacunapet);
                }
             }
          });
@@ -76,24 +80,25 @@ public class CreatePetFragment extends DialogFragment {
                String namepet = name.getText().toString().trim();
                String agepet = age.getText().toString().trim();
                String colorpet = color.getText().toString().trim();
+               Double precio_vacunapet = Double.parseDouble(precio_vacuna.getText().toString().trim());
 
                if(namepet.isEmpty() && agepet.isEmpty() && colorpet.isEmpty()){
                   Toast.makeText(getContext(), "Ingresar los datos", Toast.LENGTH_SHORT).show();
                }else{
-                  updatePet(namepet, agepet, colorpet);
+                  updatePet(namepet, agepet, colorpet, precio_vacunapet);
                }
             }
          });
       }
-
       return v;
    }
 
-   private void updatePet(String namepet, String agepet, String colorpet) {
+   private void updatePet(String namepet, String agepet, String colorpet, Double precio_vacunapet) {
       Map<String, Object> map = new HashMap<>();
       map.put("name", namepet);
       map.put("age", agepet);
       map.put("color", colorpet);
+      map.put("vaccine_price", precio_vacunapet);
 
       mfirestore.collection("pet").document(id_pet).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
          @Override
@@ -109,7 +114,7 @@ public class CreatePetFragment extends DialogFragment {
       });
    }
 
-   private void postPet(String namepet, String agepet, String colorpet) {
+   private void postPet(String namepet, String agepet, String colorpet, Double precio_vacunapet) {
       String idUser = mAuth.getCurrentUser().getUid();
       DocumentReference id = mfirestore.collection("pet").document();
 
@@ -119,6 +124,7 @@ public class CreatePetFragment extends DialogFragment {
       map.put("name", namepet);
       map.put("age", agepet);
       map.put("color", colorpet);
+      map.put("vaccine_price", precio_vacunapet);
 
       mfirestore.collection("pet").document(id.getId()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
          @Override
@@ -138,12 +144,16 @@ public class CreatePetFragment extends DialogFragment {
       mfirestore.collection("pet").document(id_pet).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
          @Override
          public void onSuccess(DocumentSnapshot documentSnapshot) {
+            DecimalFormat format = new DecimalFormat("0.00");
+//            format.setMaximumFractionDigits(2);
             String namePet = documentSnapshot.getString("name");
             String agePet = documentSnapshot.getString("age");
             String colorPet = documentSnapshot.getString("color");
+            Double precio_vacunapet = documentSnapshot.getDouble("vaccine_price");
             name.setText(namePet);
             age.setText(agePet);
             color.setText(colorPet);
+            precio_vacuna.setText(format.format(precio_vacunapet));
          }
       }).addOnFailureListener(new OnFailureListener() {
          @Override

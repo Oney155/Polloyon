@@ -50,6 +50,14 @@
                 android:layout_weight="1"
                 android:text="Edad"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/precio_vacuna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="v_price"
+                android:textSize="16sp" />
          </LinearLayout>
 
       </LinearLayout>

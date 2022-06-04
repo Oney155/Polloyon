@@ -26,6 +26,8 @@ import com.pluartz.test.CreatePetFragment;
 import com.pluartz.test.R;
 import com.pluartz.test.model.Pet;
 
+import java.text.DecimalFormat;
+
 public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHolder> {
    
    private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -45,12 +47,15 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
 
    @Override
    protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Pet Pet) {
+      DecimalFormat format = new DecimalFormat("0.00");
+//      format.setMaximumFractionDigits(2);
       DocumentSnapshot documentSnapshot = getSnapshots().getSnapshot(viewHolder.getAdapterPosition());
       final String id = documentSnapshot.getId();
 
       viewHolder.name.setText(Pet.getName());
       viewHolder.age.setText(Pet.getAge());
       viewHolder.color.setText(Pet.getColor());
+      viewHolder.vaccine_price.setText( format.format(Pet.getVaccine_price()));
 
       viewHolder.btn_edit.setOnClickListener(new View.OnClickListener() {
          @Override
@@ -99,7 +104,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
    }
 
    public class ViewHolder extends RecyclerView.ViewHolder {
-      TextView name, age, color;
+      TextView name, age, color, vaccine_price;
       ImageView btn_delete, btn_edit;
 
       public ViewHolder(@NonNull View itemView) {
@@ -108,6 +113,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
          name = itemView.findViewById(R.id.nombre);
          age = itemView.findViewById(R.id.edad);
          color = itemView.findViewById(R.id.color);
+         vaccine_price = itemView.findViewById(R.id.precio_vacuna);
          btn_delete = itemView.findViewById(R.id.btn_eliminar);
          btn_edit = itemView.findViewById(R.id.btn_editar);
       }
