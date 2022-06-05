@@ -41,6 +41,7 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:gravity="center"
           android:orientation="horizontal">
 
          <Button
@@ -48,16 +49,22 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_weight="1"
-             android:text="agregar con fragment"
+             android:backgroundTint="@color/purple_500"
+             android:text="agregar fragment"
              android:textSize="10sp"
              app:cornerRadius="50dp" />
+
+         <Space
+             android:layout_width="15dp"
+             android:layout_height="wrap_content" />
 
          <Button
              android:id="@+id/btn_add"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_weight="1"
-             android:text="agregar con activity"
+             android:backgroundTint="@color/purple_700"
+             android:text="agregar activity"
              android:textSize="10sp"
              app:cornerRadius="50dp" />
       </LinearLayout>

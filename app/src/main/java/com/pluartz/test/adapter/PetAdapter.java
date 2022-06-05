@@ -3,6 +3,7 @@ package com.pluartz.test.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.pluartz.test.CreatePetActivity;
 import com.pluartz.test.CreatePetFragment;
 import com.pluartz.test.R;
 import com.pluartz.test.model.Pet;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
@@ -56,21 +58,31 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
       viewHolder.age.setText(Pet.getAge());
       viewHolder.color.setText(Pet.getColor());
       viewHolder.vaccine_price.setText( format.format(Pet.getVaccine_price()));
+      String photoPet = Pet.getPhoto();
+      try {
+         if (!photoPet.equals(""))
+            Picasso.with(activity.getApplicationContext())
+                 .load(photoPet)
+                 .resize(150, 150)
+                 .into(viewHolder.photo_pet);
+      }catch (Exception e){
+         Log.d("Exception", "e: "+e);
+      }
 
       viewHolder.btn_edit.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
 //          SEND DATA ACTIVITY
-//            Intent i = new Intent(activity, CreatePetActivity.class);
-//            i.putExtra("id_pet", id);
-//            activity.startActivity(i);
+            Intent i = new Intent(activity, CreatePetActivity.class);
+            i.putExtra("id_pet", id);
+            activity.startActivity(i);
 
 //          SEND DATA FRAGMENT
-            CreatePetFragment createPetFragment = new CreatePetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("id_pet", id);
-            createPetFragment.setArguments(bundle);
-            createPetFragment.show(fm, "open fragment");
+//            CreatePetFragment createPetFragment = new CreatePetFragment();
+//            Bundle bundle = new Bundle();
+//            bundle.putString("id_pet", id);
+//            createPetFragment.setArguments(bundle);
+//            createPetFragment.show(fm, "open fragment");
          }
       });
 
@@ -105,7 +117,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
 
    public class ViewHolder extends RecyclerView.ViewHolder {
       TextView name, age, color, vaccine_price;
-      ImageView btn_delete, btn_edit;
+      ImageView btn_delete, btn_edit, photo_pet;
 
       public ViewHolder(@NonNull View itemView) {
          super(itemView);
@@ -114,6 +126,7 @@ public class PetAdapter extends FirestoreRecyclerAdapter<Pet, PetAdapter.ViewHol
          age = itemView.findViewById(R.id.edad);
          color = itemView.findViewById(R.id.color);
          vaccine_price = itemView.findViewById(R.id.precio_vacuna);
+         photo_pet = itemView.findViewById(R.id.photo);
          btn_delete = itemView.findViewById(R.id.btn_eliminar);
          btn_edit = itemView.findViewById(R.id.btn_editar);
       }
